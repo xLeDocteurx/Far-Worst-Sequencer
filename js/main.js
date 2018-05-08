@@ -5,12 +5,13 @@ var bpm = 128;
 var step_Type = 4;
 var bar_type = 4;
  
-var interval;
+var bar = 60 / bpm * step_Type;
+
+var interval = 1000;
 
 
 
-var tickSound;
-var tackSound;
+var tick;
 
 /*
 $.getScript("sequencer.js", function() {
@@ -31,50 +32,32 @@ var fxFolder = Folder("../akai/drumhits/FX/");
 */
 
 function preload() {
+    tick = loadSound("UI/sounds/tick.wav");
 
-    tickSound = document.createElement("audio");
-    tickSound.scr = "../UI/sounds/tick.wave";
-
-    tackSound = loadSound("../UI/sounds/tick.wave");
-
-    console.log("Ticksound : " + tickSound);
-    console.log("Ticksound / path : " + tickSound.scr);
-
-    console.log("Tacksound : " + tackSound);
-    console.log("Tacksound / path : " + tackSound.scr);
+//    createCanvas(100, 100);
 }
 
 function setup() {
+/*
+    tick = document.createElement("audio");
+    tick.scr = "../UI/sounds/tick.wave";
+ */   
+    tick.setVolume(0.7);
+    tick.playMode("restart");
 
-//    clock.isPlaying = true;
-    tackSound.setVolume(0.7);
-    tackSound.playMode("restart");
 }
-
-/* Le moteur */
-setInterval(update(),2000);
+setInterval("update()",bar * 1000);
 
 function update() {
 
-    tackSound.play();
+    console.log("bar : "+bar);
+    tick.play();
 
-    masterClock.tick();
-    console.log("time elapsed since begining : " + clock.timeElapsed() );
+//    masterClock.tick();
+//    console.log("time elapsed since begining : " + clock.timeElapsed() );
 }
 
-/* Pour plus tard, un système d'upload de samples */
-/* ( Pour l'instant nous utiliserons exclusivement
-une banque de samples prédéfinis par soucis de simplicité ) */
-/*function loadSound(sample, channel) {
 
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('#sound_file')
-        .attr('src', e.target.result);
-        sound = e.target.result;
-    };
-    reader.readAsDataURL(sample.files[0]);
-} */
 
 function sessionPlay () {
 
@@ -94,16 +77,8 @@ class Clock {
     constructor (id) {
 
         this.id = id;
-//      this.isPlaying = flase;
         this.timeElapsed;
-        this.tick;
     }
-
-/*
-    if (this.isPlaying == true){
-
-    }
-*/
 }
 
 function clocktimeElapsed () {
@@ -114,12 +89,25 @@ function clocktimeElapsed () {
     return timeSinceStart;
 }
 
-function  clocktick () {
 
-    var bar = 60 / bpm / step_Type;
 
-    if (this.timeElapsed % bar == 0) {
 
-        tick.play();
-    }
-}
+
+
+
+
+
+
+/* Pour plus tard, un système d'upload de samples */
+/* ( Pour l'instant nous utiliserons exclusivement
+une banque de samples prédéfinis par soucis de simplicité ) */
+/*function loadSound(sample, channel) {
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#sound_file')
+        .attr('src', e.target.result);
+        sound = e.target.result;
+    };
+    reader.readAsDataURL(sample.files[0]);
+} */
