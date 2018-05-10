@@ -122,7 +122,24 @@ body {
   min-width: 100px;
 }
 
+.channels-container {
 
+  /*
+  height: 400px;
+*/
+}
+
+.steps-container {
+
+  /*
+  height: 400px;
+*/
+}
+
+.steps-title {
+
+  width: 100px;
+}
 
 
 
