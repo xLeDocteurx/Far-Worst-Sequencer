@@ -5,7 +5,7 @@ var bpm = 128;
 var step_Type = 4;
 var bar_type = 4;
  
-var bar = 60 / bpm * step_Type;
+var bar = 60 / bpm;
 
 var interval = 1000;
 
@@ -51,9 +51,9 @@ setInterval("update()",bar * 1000);
 function update() {
 
     console.log("bar : "+bar);
-    tick.play();
+//    tick.play();
 
-//    masterClock.tick();
+    masterClock.tick();
 //    console.log("time elapsed since begining : " + clock.timeElapsed() );
 }
 

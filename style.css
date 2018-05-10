@@ -1,9 +1,12 @@
 .back-a {
     background-color: aliceblue;
+    height: 200px;
 }
 
 .back-b {
-    background-color: aliceblue;
+    background-color: burlywood;
+    height: 200px;
+    
 }
 
 .back-c {
@@ -26,15 +29,15 @@ html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
-
+/*
 body {
   padding-top: 56px;
 }
-
+*/
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
-    top: 56px; /* Height of navbar */
+/*    top: 56px; /* Height of navbar */
     bottom: 0;
     left: 100%;
     width: 100%;
@@ -101,6 +104,33 @@ body {
 .lh-100 { line-height: 1; }
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.channel {
+  min-width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 /* Extra small devices (portrait phones, less than 576px) */
