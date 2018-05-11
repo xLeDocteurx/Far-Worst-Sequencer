@@ -5,13 +5,12 @@ var bpm = 128;
 var step_Type = 4;
 var bar_type = 4;
  
-var bar = 60 / bpm;
+var bar = 60 / bpm * 1000;
+var stepsResolution = 16;
 
-var interval = 1000;
+var stepCounter = 0;
 
-
-
-var tick;
+var step = bar / stepsResolution;
 
 /*
 $.getScript("sequencer.js", function() {
@@ -31,47 +30,152 @@ var percussionFolder = Folder("../akai/drumhits/PERCUSSION/");
 var fxFolder = Folder("../akai/drumhits/FX/");
 */
 
-function preload() {
-    tick = loadSound("UI/sounds/tick.wav");
+///////////////////////////////////////////////
 
-//    createCanvas(100, 100);
+var drumRackChannelsList = [];
+
+var kick;
+var channel_xx;
+var snare;
+var channel_xy;
+
+
+///////////////////////////////////////////////
+
+
+
+function preload() {
+
+    kick = loadSound("./akai/drumhits/KICKS/HH_JKick1.wav");
+    snare = loadSound("./akai/drumhits/SNARES/HH_JRim1.wav");
+    
+    channel_xx = new drumRack_channel (kick,     [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0] );
+    channel_xy = new drumRack_channel (snare,    [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0] );
+
+    drumRackChannelsList.push(channel_xx);
+    drumRackChannelsList.push(channel_xy);
+
+    console.table(drumRackChannelsList);
 }
 
 function setup() {
-/*
-    tick = document.createElement("audio");
-    tick.scr = "../UI/sounds/tick.wave";
- */   
-    tick.setVolume(0.7);
-    tick.playMode("restart");
 
+/*
+    kick = document.createElement("audio");
+    kick.scr = "../UI/sounds/kick.wave";
+ */
+
+ kick.setVolume(0.7);
+ kick.playMode("restart");
+
+ console.log("preload channel_xx" + channel_xx);
+
+
+//////////////////////////////////////////
+    
+
+//////////////////////////////////////////
+
+    update();
+
+    console.log("Project started with tempo of : " + bpm);
 }
-setInterval("update()",bar * 1000);
 
 function update() {
+//////////////////////////////////////////////
 
-    console.log("bar : "+bar);
-//    tick.play();
+// A netoyer ?? // ( simplifier le code d'incrémentation )
 
-    masterClock.tick();
-//    console.log("time elapsed since begining : " + clock.timeElapsed() );
+    bar = 60 / bpm * 1000 * 4;
+    step = bar / stepsResolution;
+         
+    setTimeout(() => {
+        update(step);
+    }, step);
+
+
+/////////////////////////////////////////////
+
+launchSteps (stepCounter);
+
+/////////////////////////////////////////////
+    stepCounter += 1;
+    if (stepCounter >= stepsResolution) {
+       stepCounter = 0;
+    }
+
+
+
+//    console.log("bar : " + bar);
+//     console.log("step : " + step);
+//     kick.play();
+
 }
-
-
 
 function sessionPlay () {
 
     isPlaying = true;
-    start = Date.now();
+//    start = Date.now();
 
 }
 
 function sessionStop () {
 
     isPlaying = false;
-    start = null;
+//    start = null;
 }
 
+function setBPMx (tValue) {
+    bpm = tValue;
+    console.log("Tempo changed to : " + bpm);
+}
+
+
+
+function launchSteps (i) {
+    if (isPlaying == true) {
+
+        for (var chan of drumRackChannelsList) {
+
+            if (chan.steps[i] != 0) {
+
+                chan.sample.play();
+            }
+        }
+
+    }
+}
+
+
+
+
+
+
+
+function newDrumRack (rack, sample, steps) {
+
+    rack = new drumRack_channel(sample, steps);
+}
+
+class drumRack_channel {
+
+    constructor (sample, steps) {
+        
+//        this.steps = new Array(stepsResolution);
+        this.sample = sample;
+        this.steps = steps;
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
 class Clock {
 
     constructor (id) {
@@ -88,6 +192,7 @@ function clocktimeElapsed () {
 
     return timeSinceStart;
 }
+*/
 
 
 

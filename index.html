@@ -10,15 +10,16 @@
 	<script language="javascript" type="text/javascript" src="js/frameworks/addons/p5.sound.js"></script>
 	<script language="javascript" type="text/javascript" src="js/frameworks/addons/p5.dom.js"></script>
 
+	<script language="javascript" type="text/javascript" src="js/frameworks/jQuery.js"></script>
+<!--	<script language="javascript" type="text/javascript" src="js/frameworks/popper.js"></script> -->
+	<script language="javascript" type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/css/bootstrap.css" />
+   
+
 	<script language="javascript" type="text/javascript" src="js/sequencer.js"></script>
 	<script language="javascript" type="text/javascript" src="js/main.js"></script>
 
 
-	<script language="javascript" type="text/javascript" src="js/frameworks/jQuery.js"></script>
-	<script language="javascript" type="text/javascript" src="js/frameworks/popper.js"></script>
-	<script language="javascript" type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/css/bootstrap.css" />
-   
 	<script language="javascript" type="text/javascript" src="js/scripts.js"></script>
 	<link rel="stylesheet" href="style.css">
 
@@ -71,18 +72,18 @@
 
 		</nav>
 
-			<nav class="row">
+			<nav class="row bg-dark">
 				<div class="ml-auto"></div>
 				<button class="btn btn-success" onclick="sessionPlay()">Play</button>
+				<button class="btn btn-danger" onclick="sessionStop()">Stop</button>
 				<div class="d-inline-block">
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">bpm</span>
 						</div>
-						<input type="number" value="128" min="70" max="300">
+						<input id="input-bpm" type="number" value="128" min="70" max="300" onchange="setBPMx(this.value)">
 					</div>
 				</div>
-				<button class="btn btn-danger" onclick="sessionStop()">Stop</button>
 				<div class="mr-auto"></div>
 			</nav>
 	</header>
@@ -103,36 +104,71 @@
 			<div class="col-sm-1">
 			</div> -->
 			<div class="col d-flex align-items-stretch">
-				<div type="button" class="channel btn border rounded">
+				<div type="button" class="channel border rounded">
 					<div>Drum Rack</div>
 					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 
-					<div><button type="button" class="btn launch-btn">Clip ##</button></div>
-					<div><button type="button" class="btn launch-btn">Clip ##</button></div>
-					<div><button type="button" class="btn launch-btn">Clip ##</button></div>
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn">Clip ##</button>
+							<button type="button" class="btn disabled launch-btn">Launch</button>
+						</div>
+					</div>
+
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn">Clip ##</button>
+							<button type="button" class="btn launch-btn">Launch</button>
+						</div>
+					</div>
+
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn">Clip ##</button>
+							<button type="button" class="btn launch-btn">Launch</button>
+						</div>
+					</div>
 				</div>
 				<div type="button" class="channel border rounded">
 					<div>Midi Instrument</div>
 					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 
-					<div><button type="button" class="btn launch-btn">Clip ##</button></div>
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn">Clip ##</button>
+							<button type="button" class="btn launch-btn">Launch</button>
+						</div>
+					</div>
+
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn">Clip ##</button>
+							<button type="button" class="btn launch-btn">Launch</button>
+						</div>
+					</div>
 				</div>
 				<div type="button" class="channel border rounded">
 					<div>Audio Clip</div>
 					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 
-					<div><button type="button" class="btn launch-btn">Clip ##</button></div>
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn">Clip ##</button>
+							<button type="button" class="btn launch-btn">Launch</button>
+						</div>
+					</div>
+
 				</div>
 				<div type="button" class="channel border rounded">
 					<div>Audio Input</div>
 					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 
 				</div>
@@ -142,14 +178,14 @@
 				<div type="button" class="channel border rounded ml-auto">
 					<div>Return A</div>
 					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 
 				</div>
 				<div type="button" class="channel border rounded">
 					<div>Return B</div>
 					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 
 				</div>
@@ -161,7 +197,7 @@
 
 			<div class="col-sm-1 d-flex align-items-stretch">		
 						<div id="scenes" class="border rounded">
-							<div>Play Buttons</div>
+							<div>Scenes</div>
 							<div class="progress">
 								<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
