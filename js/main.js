@@ -1,9 +1,9 @@
-var start;
+//var start;
 var isPlaying = false;
 
 var bpm = 128;
 var step_Type = 4;
-var bar_type = 4;
+//var bar_type = 4;
  
 var bar = 60 / bpm * 1000;
 var stepsResolution = 16;
@@ -54,8 +54,6 @@ function preload() {
 
     drumRackChannelsList.push(channel_xx);
     drumRackChannelsList.push(channel_xy);
-
-    console.table(drumRackChannelsList);
 }
 
 function setup() {
@@ -65,11 +63,13 @@ function setup() {
     kick.scr = "../UI/sounds/kick.wave";
  */
 
- kick.setVolume(0.7);
- kick.playMode("restart");
 
- console.log("preload channel_xx" + channel_xx);
+    kick.setVolume(1.0);
+    kick.playMode("restart");
+    snare.setVolume(1.0);
+    snare.playMode("restart");
 
+    console.log("preload channel_xx" + channel_xx);
 
 //////////////////////////////////////////
     
@@ -84,19 +84,20 @@ function setup() {
 function update() {
 //////////////////////////////////////////////
 
-// A netoyer ?? // ( simplifier le code d'incrémentation )
-
+//  A netoyer ?? // ( simplifier le code d'incrémentation )
     bar = 60 / bpm * 1000 * 4;
     step = bar / stepsResolution;
          
+
+
+//  setTimeout("update()", step);
     setTimeout(() => {
         update(step);
     }, step);
 
-
 /////////////////////////////////////////////
 
-launchSteps (stepCounter);
+    launchSteps(stepCounter);
 
 /////////////////////////////////////////////
     stepCounter += 1;
@@ -109,14 +110,12 @@ launchSteps (stepCounter);
 //    console.log("bar : " + bar);
 //     console.log("step : " + step);
 //     kick.play();
-
 }
 
 function sessionPlay () {
 
     isPlaying = true;
 //    start = Date.now();
-
 }
 
 function sessionStop () {
@@ -134,6 +133,7 @@ function setBPMx (tValue) {
 
 function launchSteps (i) {
     if (isPlaying == true) {
+
 
         for (var chan of drumRackChannelsList) {
 
