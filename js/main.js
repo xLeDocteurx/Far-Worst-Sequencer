@@ -147,6 +147,8 @@ function update() {
 
 function sessionPlay () {
 
+    sessionStop();
+
     isPlaying = true;
     update();    
 //    start = Date.now();
