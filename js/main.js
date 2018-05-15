@@ -62,9 +62,9 @@ function preload() {
     all_tracks[0].channels[1] = channel_xy;
     all_tracks[0].channels[2] = channel_xz;
 
-    clip_xx = new DrumRack_Clip(1, [[1],[],[],[],[2],[],[],[],[],[],[1],[],[2],[],[],[]]);
-    clip_xy = new DrumRack_Clip(1);
-    clip_xz = new DrumRack_Clip(2, [[1],[],[],[],[2],[],[],[],[2],[],[1],[],[2],[],[],[],[1],[],[],[],[2],[],[],[],[],[2],[1],[],[2],[],[],[]]);
+    clip_xx = new DrumRack_Clip(1, [[1],[],[3],[],[2,3],[],[3],[],[3],[],[1],[],[2,3],[],[3],[]]);
+    clip_xy = new DrumRack_Clip(2, [[1],[],[],[1],[2],[],[],[],[],[2],[1],[],[2],[],[1],[],[1],[],[],[],[2],[],[],[],[],[2],[1],[],[2],[],[],[]]);    
+    clip_xz = new DrumRack_Clip(1);
 
     all_tracks[0].clips.push(clip_xx);
     all_tracks[0].clips.push(clip_xy);
@@ -196,19 +196,26 @@ function launchSteps (step) {
     }
 
 }
-/*
-function nextSteps () {
 
-    for (var chan of track_xx_channels) {
-            console.log(chan
-            
-            );
-            chan
-            
-            += 1;
+function previousSteps () {
+
+    for (var track of all_tracks) {
+
+            track.currentClip -= 1;
+
+            console.log(track.currentClip);
     }
 }
-*/
+
+function nextSteps () {
+
+    for (var track of all_tracks) {
+
+            track.currentClip += 1;
+            
+            console.log(track.currentClip);            
+    }
+}
 
 
 function loadTrack (track) {
@@ -251,7 +258,7 @@ function loadDrumRack_channel (channel) {
 
         var drumRackContainer = document.getElementById("steps-container");
         console.log("loaddrumRack_channel : " + channel.sample);
-        var drtemplate = new drumRackChannel_Template(channel.sample);
+        var drtemplate = new drumRackChannel_Template(channel);
         drumRackContainer.innerHTML += drtemplate.html;
     }
 }
@@ -267,13 +274,13 @@ class drumRack_channel {
     }
 }
 
-function drumRackChannel_Template (sample) {
+function drumRackChannel_Template (channel) {
 
-    this.html = "<div id='" + sample.name + "' class='row border'>" +
+    this.html = "<div id='" + channel.sample.name + "' class='row border'>" +
                     "<div class='col-sm-1 border'>" +
-                    "    " + sample.name + " : " +
+                    "    " + channel.sample.name + " : " +
                     "</div>" +
-                    "<div id='" + sample.name + "_currentClip" + "' class='col border'>" +
+                    "<div id='" + channel.sample.name + "_currentClip" + "' class='col border'>" +
                     // A instancier depuis le chargement des clips 
                     //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
                     //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
