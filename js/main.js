@@ -1,7 +1,7 @@
 //var start;
 var isPlaying = false;
 
-var bpm = 128;
+var bpm = 117;
 var step_Type = 4;
 //var bar_type = 4;
  
@@ -62,13 +62,17 @@ function preload() {
     all_tracks[0].channels[1] = channel_xy;
     all_tracks[0].channels[2] = channel_xz;
 
-    clip_xx = new DrumRack_Clip(1, [[1],[],[3],[],[2,3],[],[3],[],[3],[],[1],[],[2,3],[],[3],[]]);
-    clip_xy = new DrumRack_Clip(2, [[1],[],[],[1],[2],[],[],[],[],[2],[1],[],[2],[],[1],[],[1],[],[],[],[2],[],[],[],[],[2],[1],[],[2],[],[],[]]);    
-    clip_xz = new DrumRack_Clip(1);
+    clip_xx = new DrumRack_Clip(1, [[1],[],[],[],[1],[],[],[],[1],[],[],[],[1],[],[],[]]);
+    clip_xy = new DrumRack_Clip(1, [[1],[],[],[],[2],[],[],[],[1],[],[],[],[2],[],[],[]]);
+    clip_xz = new DrumRack_Clip(1, [[1],[],[],[],[1],[],[],[],[1],[],[],[],[1],[],[],[]]);
+    clip_xa = new DrumRack_Clip(1, [[1],[3],[3],[3],[1,3],[3],[3],[3],[1],[3],[3],[3],[1,3],[3],[3],[3]]);
+    // clip_xy = new DrumRack_Clip(2, [[1],[],[],[1],[2],[],[],[],[],[2],[1],[],[2],[],[1],[],[1],[],[],[],[2],[],[],[],[],[2],[1],[],[2],[],[],[]]);    
+    // clip_xz = new DrumRack_Clip(1);
 
     all_tracks[0].clips.push(clip_xx);
     all_tracks[0].clips.push(clip_xy);
     all_tracks[0].clips.push(clip_xz);
+    all_tracks[0].clips.push(clip_xa);
     
 
 //    track_xx.push(track_xx_channels);
