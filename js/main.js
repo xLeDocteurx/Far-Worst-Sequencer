@@ -3,7 +3,7 @@ var fr = 30;
 //var start;
 var isPlaying = false;
 
-var bpm = 117;
+var bpm = 105;
 var step_Type = 4;
 //var bar_type = 4;
  
@@ -29,12 +29,14 @@ var all_tracks = [];
 //var track_xx = [];
 var track_xx_channels = [];
 
-var kick;
+var kick1;
 var channel_xx;
 var snare;
 var channel_xy;
 var hhclosed;
 var channel_xz;
+var clap;
+var channel_xa;
 
 
 ///////////////////////////////////////////////
@@ -47,52 +49,61 @@ function preload() {
     kick.scr = "../UI/sounds/kick.wave";
  */
 
-    kick = loadSound("./akai/drumhits/KICKS/HH_JKick1.wav");
-    snare = loadSound("./akai/drumhits/SNARES/HH_JRim1.wav");
-    hhclosed = loadSound("./akai/drumhits/HATS/HH_Hat1.wav");
+    kick1 = loadSound("./factory_samples/mad_zack/Satin_Charly/kick1.wav");
+    snare = loadSound("./factory_samples/mad_zack/Satin_Charly/snare.wav");
+    hhclosed = loadSound("./factory_samples/mad_zack/Satin_Charly/hhc.wav");
+    clap = loadSound("./factory_samples/mad_zack/Satin_Charly/clap.wav");
     
-    var track_xx = new Track("Drum Rack" + "_" + all_tracks.length);
+    var track_xx = new Track(all_tracks.length, "Drum Rack");
 
     all_tracks.push(track_xx);
     
 
-    channel_xx = new drumRack_channel (kick);
-    channel_xy = new drumRack_channel (snare);
-    channel_xz = new drumRack_channel (hhclosed);
-
-    all_tracks[0].channels[0] = channel_xx;
-    all_tracks[0].channels[1] = channel_xy;
-    all_tracks[0].channels[2] = channel_xz;
-
-    clip_xx = new DrumRack_Clip(1, [[1],[],[],[],
-                                    [1],[],[],[],
-                                    [1],[],[],[],
-                                    [1],[],[],[]]);
-    clip_xy = new DrumRack_Clip(1, [[1],[],[],[],
-                                    [2],[],[],[],
-                                    [1],[],[],[],
-                                    [2],[],[],[]]);
-    clip_xz = new DrumRack_Clip(1, [[1],[],[],[],
-                                    [1],[],[],[],
-                                    [1],[],[],[],
-                                    [1],[],[],[]]);
-    clip_xa = new DrumRack_Clip(1, [[1],[3],[3],[3],
-                                    [1,3],[3],[3],[3],
-                                    [1],[3],[3],[3],
-                                    [1,3],[3],[3],[3]]);
-    // clip_xy = new DrumRack_Clip(2, [[1],[],[],[1],[2],[],[],[],[],[2],[1],[],[2],[],[1],[],[1],[],[],[],[2],[],[],[],[],[2],[1],[],[2],[],[],[]]);    
-    // clip_xz = new DrumRack_Clip(1);
-
-    all_tracks[0].clips.push(clip_xx);
-    all_tracks[0].clips.push(clip_xy);
-    all_tracks[0].clips.push(clip_xz);
-    all_tracks[0].clips.push(clip_xa);
+    channel_xx = new drumRack_channel (all_tracks[0].channels.length, kick1);
+    all_tracks[0].channels.push(channel_xx);
     
+    channel_xy = new drumRack_channel (all_tracks[0].channels.length, snare);
+    all_tracks[0].channels.push(channel_xy);
 
-//    track_xx.push(track_xx_channels);
+    channel_xz = new drumRack_channel (all_tracks[0].channels.length, hhclosed);
+    all_tracks[0].channels.push(channel_xz);
 
-    // channel_xz = new drumRack_channel (hhclosed, [[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0]],
-    //     [0,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0]);
+    channel_xa = new drumRack_channel (all_tracks[0].channels.length, clap);
+    all_tracks[0].channels.push(channel_xa);
+
+
+    clip_xx = new DrumRack_Clip(all_tracks[0].clips.length, 1,
+                                   [[1],[],[],[],
+                                    [4],[],[],[],
+                                    [1],[],[1],[],
+                                    [4],[1],[],[]]);
+                                    
+    all_tracks[0].clips.push(clip_xx);
+
+    clip_xy = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
+                                   [[1],[],[3],[],
+                                    [2],[],[],[3],
+                                    [1],[],[3],[],
+                                    [2],[],[3],[3]]);
+    
+    all_tracks[0].clips.push(clip_xy);
+
+    clip_xz = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
+                                   [[1],[],[3],[],
+                                    [1],[],[3],[],
+                                    [1],[],[3],[],
+                                    [1],[],[3],[]]);
+    
+    all_tracks[0].clips.push(clip_xz);
+
+    clip_xa = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
+                                   [[1],[3],[3],[3],
+                                    [2,3],[3],[3],[3],
+                                    [1],[3],[3],[3],
+                                    [2,3,4],[3],[3],[3]]);
+    
+    all_tracks[0].clips.push(clip_xa);
+
 }
 
 function setup() {
@@ -102,13 +113,6 @@ function setup() {
     for (var track of all_tracks) {
 
         loadTrack(track);
-        
-        console.log("track, " + track + " nbr of channels : " + track.channels.length);
-        for (var channel of track.channels) {
-
-            console.log(channel);            
-            loadDrumRack_channel(channel);
-        }
 
         console.log("track, " + track + " nbr of clips : " + track.clips.length);
         for (var clip of track.clips) {
@@ -118,12 +122,14 @@ function setup() {
         }
     }
 
-    kick.setVolume(1.0);
-    kick.playMode("restart");
+    kick1.setVolume(1.0);
+    kick1.playMode("restart");
     snare.setVolume(1.0);
     snare.playMode("restart");
     hhclosed.setVolume(1.0);
     hhclosed.playMode("restart");
+    clap.setVolume(1.0);
+    clap.playMode("restart");
 
 //////////////////////////////////////////
     
@@ -188,6 +194,26 @@ function setBPMx (tValue) {
 }
 
 
+function previousSteps () {
+
+    for (var track of all_tracks) {
+
+            track.currentClip -= 1;
+
+            console.log(track.currentClip);
+    }
+}
+
+function nextSteps () {
+
+    for (var track of all_tracks) {
+
+            track.currentClip += 1;
+            
+            console.log(track.currentClip);            
+    }
+}
+
 function launchSteps (step) {
 
 
@@ -211,26 +237,21 @@ function launchSteps (step) {
     }
 }
 
-function previousSteps () {
+function clip_Edit (track_ID, clip_ID) {
 
-    for (var track of all_tracks) {
+        console.log("track, " + all_tracks[track_ID] + " nbr of channels : " + all_tracks[track_ID].channels.length);
+        document.getElementById("steps-container").innerHTML = "";        
+        for (var channel of all_tracks[track_ID].channels) {
 
-            track.currentClip -= 1;
-
-            console.log(track.currentClip);
-    }
+            console.log(channel);      
+            loadDrumRack_channel(channel);
+        }  
 }
 
-function nextSteps () {
-
-    for (var track of all_tracks) {
-
-            track.currentClip += 1;
-            
-            console.log(track.currentClip);            
-    }
+function clip_Launch (track_ID, clip_ID) {
+    
+    all_tracks[track_ID].currentClip = clip_ID;    
 }
-
 
 function loadTrack (track) {
 //pour le "create new track"
@@ -241,13 +262,12 @@ function loadTrack (track) {
     tracksContainer.innerHTML += ttemplate.html;
 }
 
-function loadDrumRack_channel (channel) {
+function loadDrumRack_channel (channel, id) {
     
     if (channel != null) {
-
         var drumRackContainer = document.getElementById("steps-container");
         console.log("loaddrumRack_channel : " + channel.sample);
-        var drtemplate = new drumRackChannel_Template(channel);
+        var drtemplate = new drumRackChannels_Template(channel, id);
         drumRackContainer.innerHTML += drtemplate.html;
     }
 }
@@ -255,7 +275,7 @@ function loadDrumRack_channel (channel) {
 function loadDrumRack_clip (track, clip) {
 
     var clipsContainer = document.getElementById(track.name);
-    var cliptemplate = new drumRackClip_Template(clip);
+    var cliptemplate = new drumRackClip_Template(track, clip);
     clipsContainer.innerHTML += cliptemplate.html;
 
     // var stepsContainer = document.getElementById("steps-container");

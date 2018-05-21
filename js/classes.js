@@ -2,12 +2,14 @@
 
 class Track {
 
-    constructor (type)  {
+    constructor (id, type)  {
 
+        this.id = id;
         this.type = type;
-        this.name = type;
+        this.name = this.type + "_" + this.id;
 
-        this.channels = new Array(16);
+        // this.channels = new Array(16);
+        this.channels = [];
 
         this.currentClip = 0;
         this.clips = [];
@@ -18,17 +20,20 @@ class drumRack_channel {
 
 // Un systeme d'id pour éviter les problemes de réorganisation 
 // des array lors de la suppression d'un channel 
-    constructor (sample) {
+    constructor (id, sample) {
         
 //        this.steps = new Array(stepsResolution);
+        this.id = id;
+        this.name = sample.url.substring(sample.url.lastIndexOf('/')+1);
         this.sample = sample;
     }
 }
 
 class DrumRack_Clip {
 
-    constructor (barsLength, steps) {
+    constructor (id, barsLength, steps) {
         
+        this.id = id;
         this.channels = new Array(16);
         if (!steps) {
             this.steps = new Array(stepsResolution * barsLength);

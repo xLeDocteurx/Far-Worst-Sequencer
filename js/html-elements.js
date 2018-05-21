@@ -1,7 +1,7 @@
 
 
 function track_Template (track) {
-
+    
     this.html = "<div id='" + track.name + "' type=\"button\" class=\"channel border rounded\">" + 
                     "<div>" + 
                     track.name + 
@@ -10,30 +10,33 @@ function track_Template (track) {
                 "</div>";
 }
 
-function drumRackChannel_Template (channel) {
+function drumRackChannels_Template (channel) {
 
-    this.html = "<div id='" + channel.sample.name + "' class='row border'>" +
-                    "<div class='col-sm-1 border'>" +
-                    "    " + channel.sample.name + " : " +
-                    "</div>" +
-                    "<div id='" + channel.sample.name + "_currentClip" + "' class='col border'>" +
-                    // A instancier depuis le chargement des clips 
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    // "</div>" +
-                "</div>";
+    var filename = channel.name;
+
+    this.html = `<div id="${filename}" class="row border">
+                    <div class="col-sm-1 border">
+                        ${filename} : 
+                    </div>
+                    <div id="${filename + "_currentClip"}" class="col border">
+                        
+                        <!-- A instancier depuis le chargement des clips -->
+                        <input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>
+                        <input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>
+                        <input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>
+                        <input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>
+                    </div>
+                </div>`;
 }
 
-function drumRackClip_Template (clip) {
+function drumRackClip_Template (track, clip) {
     
-    this.html = "<div>" +
-                    "<div class='btn-group' role='group' aria-label='Basic example'>" +
-                        "<button type='button' class='btn'>Clip ##</button>" +
-                        "<button type='button' class='btn launch-btn'>Launch</button>" +
-                    "</div>" +
-                "</div>";
+    this.html = `<div>
+                    <div class='btn-group' role='group' aria-label='Basic example'>
+                        <button type='button' class='btn' onclick="clip_Edit(${track.id}, ${clip.id});">Clip ${clip.id}</button>
+                        <button type='button' class='btn launch-btn' onclick="clip_Launch(${track.id}, ${clip.id});">Launch</button>
+                    </div>
+                </div>`;
 }
 
 function drumRackSteps_Template (clip) {
