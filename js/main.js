@@ -220,7 +220,7 @@ function launchSteps (step) {
     for (var i = 0; i < all_tracks.length; i++) {
         var track = all_tracks[i];
 
-        for (var j = 0; j < track.channels.length; j++) {
+        for (var j = 0; j <= track.channels.length; j++) {
 
             var clip = track.clips[track.currentClip];
             var step = clip.steps[currentStep];
