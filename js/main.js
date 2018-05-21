@@ -1,3 +1,5 @@
+var fr = 30;
+
 //var start;
 var isPlaying = false;
 
@@ -82,6 +84,7 @@ function preload() {
 }
 
 function setup() {
+    frameRate(fr);
 
 // REMPLACER PAR UN MAP //
     for (var track of all_tracks) {
@@ -118,15 +121,16 @@ function setup() {
 //    update();
 }
 
-function update() {
-//////////////////////////////////////////////
+function draw () {
 
-//  A netoyer ?? // ( simplifier le code d'incrémentation )
+    //  A netoyer ?? // ( simplifier le code d'incrémentation )
     bar = 60 / bpm * 1000 * 4;
     step = bar / stepsResolution;
-         
 
+}
 
+function update() {
+//////////////////////////////////////////////
 //  setTimeout("update()", step);
     update_timeout = setTimeout(() => {
         update(step);
