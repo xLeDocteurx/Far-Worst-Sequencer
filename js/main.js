@@ -59,16 +59,16 @@ function preload() {
     all_tracks.push(track_xx);
     
 
-    channel_xx = new drumRack_channel (all_tracks[0].channels.length, kick1);
+    channel_xx = new drumRack_Steps (all_tracks[0].channels.length, kick1);
     all_tracks[0].channels.push(channel_xx);
     
-    channel_xy = new drumRack_channel (all_tracks[0].channels.length, snare);
+    channel_xy = new drumRack_Steps (all_tracks[0].channels.length, snare);
     all_tracks[0].channels.push(channel_xy);
 
-    channel_xz = new drumRack_channel (all_tracks[0].channels.length, hhclosed);
+    channel_xz = new drumRack_Steps (all_tracks[0].channels.length, hhclosed);
     all_tracks[0].channels.push(channel_xz);
 
-    channel_xa = new drumRack_channel (all_tracks[0].channels.length, clap);
+    channel_xa = new drumRack_Steps (all_tracks[0].channels.length, clap);
     all_tracks[0].channels.push(channel_xa);
 
 
@@ -240,17 +240,18 @@ function launchSteps (step) {
 function clip_Edit (track_ID, clip_ID) {
 
         console.log("track, " + all_tracks[track_ID] + " nbr of channels : " + all_tracks[track_ID].channels.length);
-        document.getElementById("steps-container").innerHTML = "";        
-        for (var channel of all_tracks[track_ID].channels) {
-
-            console.log(channel);      
-            loadDrumRack_channel(channel);
+        document.getElementById("clip-container").innerHTML = `<div id="steps-container"></div>`;        
+        for (var channel of all_tracks[track_ID].channels) {    
+            loadDrumRack_Steps(channel);
         }  
 }
 
 function clip_Launch (track_ID, clip_ID) {
     
-    all_tracks[track_ID].currentClip = clip_ID;    
+    all_tracks[track_ID].currentClip = clip_ID;
+
+    if(!isPlaying)
+    sessionPlay (); 
 }
 
 function loadTrack (track) {
@@ -262,12 +263,12 @@ function loadTrack (track) {
     tracksContainer.innerHTML += ttemplate.html;
 }
 
-function loadDrumRack_channel (channel, id) {
+function loadDrumRack_Steps (channel, id) {
     
     if (channel != null) {
         var drumRackContainer = document.getElementById("steps-container");
-        console.log("loaddrumRack_channel : " + channel.sample);
-        var drtemplate = new drumRackChannels_Template(channel, id);
+        console.log("loaddrumRack_Steps : " + channel.sample);
+        var drtemplate = new drumRackSteps_Template(channel, id);
         drumRackContainer.innerHTML += drtemplate.html;
     }
 }

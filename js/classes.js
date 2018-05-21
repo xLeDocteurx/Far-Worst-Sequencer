@@ -16,7 +16,7 @@ class Track {
     }
 }
 
-class drumRack_channel {
+class drumRack_Steps {
 
 // Un systeme d'id pour éviter les problemes de réorganisation 
 // des array lors de la suppression d'un channel 

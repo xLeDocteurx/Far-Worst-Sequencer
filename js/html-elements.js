@@ -10,7 +10,7 @@ function track_Template (track) {
                 "</div>";
 }
 
-function drumRackChannels_Template (channel) {
+function drumRackSteps_Template (channel) {
 
     var filename = channel.name;
 
@@ -39,7 +39,7 @@ function drumRackClip_Template (track, clip) {
                 </div>`;
 }
 
-function drumRackSteps_Template (clip) {
+// function drumRackSteps_Template (clip) {
     
-    this.html = "CLIP<br>";
-}
+//     this.html = "CLIP<br>";
+// }
