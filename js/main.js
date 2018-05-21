@@ -64,10 +64,22 @@ function preload() {
     all_tracks[0].channels[1] = channel_xy;
     all_tracks[0].channels[2] = channel_xz;
 
-    clip_xx = new DrumRack_Clip(1, [[1],[],[],[],[1],[],[],[],[1],[],[],[],[1],[],[],[]]);
-    clip_xy = new DrumRack_Clip(1, [[1],[],[],[],[2],[],[],[],[1],[],[],[],[2],[],[],[]]);
-    clip_xz = new DrumRack_Clip(1, [[1],[],[],[],[1],[],[],[],[1],[],[],[],[1],[],[],[]]);
-    clip_xa = new DrumRack_Clip(1, [[1],[3],[3],[3],[1,3],[3],[3],[3],[1],[3],[3],[3],[1,3],[3],[3],[3]]);
+    clip_xx = new DrumRack_Clip(1, [[1],[],[],[],
+                                    [1],[],[],[],
+                                    [1],[],[],[],
+                                    [1],[],[],[]]);
+    clip_xy = new DrumRack_Clip(1, [[1],[],[],[],
+                                    [2],[],[],[],
+                                    [1],[],[],[],
+                                    [2],[],[],[]]);
+    clip_xz = new DrumRack_Clip(1, [[1],[],[],[],
+                                    [1],[],[],[],
+                                    [1],[],[],[],
+                                    [1],[],[],[]]);
+    clip_xa = new DrumRack_Clip(1, [[1],[3],[3],[3],
+                                    [1,3],[3],[3],[3],
+                                    [1],[3],[3],[3],
+                                    [1,3],[3],[3],[3]]);
     // clip_xy = new DrumRack_Clip(2, [[1],[],[],[1],[2],[],[],[],[],[2],[1],[],[2],[],[1],[],[1],[],[],[],[2],[],[],[],[],[2],[1],[],[2],[],[],[]]);    
     // clip_xz = new DrumRack_Clip(1);
 
@@ -126,7 +138,6 @@ function draw () {
     //  A netoyer ?? // ( simplifier le code d'incrémentation )
     bar = 60 / bpm * 1000 * 4;
     step = bar / stepsResolution;
-
 }
 
 function update() {
@@ -145,12 +156,6 @@ function update() {
     if (currentStep >= stepsResolution) {
        currentStep = 0;
     }
-
-
-
-//    console.log("bar : " + bar);
-//     console.log("step : " + step);
-//     kick.play();
 }
 
 function sessionPlay () {
@@ -204,7 +209,6 @@ function launchSteps (step) {
             }
         }
     }
-
 }
 
 function previousSteps () {
@@ -237,31 +241,6 @@ function loadTrack (track) {
     tracksContainer.innerHTML += ttemplate.html;
 }
 
-class Track {
-
-    constructor (type)  {
-
-        this.type = type;
-        this.name = type;
-
-        this.channels = new Array(16);
-
-        this.currentClip = 0;
-        this.clips = [];
-    }
-}
-
-function track_Template (track) {
-
-    this.html = "<div id='" + track.name + "' type=\"button\" class=\"channel border rounded\">" + 
-                    "<div>" + 
-                    track.name + 
-                    "</div>" + 
-                    "<div class=\"progress\"><div class=\"progress-bar progress-bar-striped bg-info\" role=\"progressbar\" style=\"width: 65%\" aria-valuenow=\"65\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div>" + 
-                "</div>";
-}
-
-
 function loadDrumRack_channel (channel) {
     
     if (channel != null) {
@@ -273,33 +252,6 @@ function loadDrumRack_channel (channel) {
     }
 }
 
-class drumRack_channel {
-
-// Un systeme d'id pour éviter les problemes de réorganisation 
-// des array lors de la suppression d'un channel 
-    constructor (sample) {
-        
-//        this.steps = new Array(stepsResolution);
-        this.sample = sample;
-    }
-}
-
-function drumRackChannel_Template (channel) {
-
-    this.html = "<div id='" + channel.sample.name + "' class='row border'>" +
-                    "<div class='col-sm-1 border'>" +
-                    "    " + channel.sample.name + " : " +
-                    "</div>" +
-                    "<div id='" + channel.sample.name + "_currentClip" + "' class='col border'>" +
-                    // A instancier depuis le chargement des clips 
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    //     "<input type='checkbox'><input type='checkbox'><input type='checkbox'><input type='checkbox'>" +
-                    // "</div>" +
-                "</div>";
-}
-
 function loadDrumRack_clip (track, clip) {
 
     var clipsContainer = document.getElementById(track.name);
@@ -309,35 +261,6 @@ function loadDrumRack_clip (track, clip) {
     // var stepsContainer = document.getElementById("steps-container");
     // var stepstemplate = new drumRackSteps_Template(clip);
     // stepsContainer.innerHTML += stepstemplate.html;
-
-}
-
-class DrumRack_Clip {
-
-    constructor (barsLength, steps) {
-        
-        this.channels = new Array(16);
-        if (!steps) {
-            this.steps = new Array(stepsResolution * barsLength);
-        } else {
-            this.steps = steps;
-        }
-    }
-}
-
-function drumRackClip_Template (clip) {
-    
-    this.html = "<div>" +
-                    "<div class='btn-group' role='group' aria-label='Basic example'>" +
-                        "<button type='button' class='btn'>Clip ##</button>" +
-                        "<button type='button' class='btn launch-btn'>Launch</button>" +
-                    "</div>" +
-                "</div>";
-}
-
-function drumRackSteps_Template (clip) {
-    
-    this.html = "CLIP<br>";
 }
 
 
@@ -345,24 +268,6 @@ function drumRackSteps_Template (clip) {
 
 
 
-/*
-class Clock {
-
-    constructor (id) {
-
-        this.id = id;
-        this.timeElapsed;
-    }
-}
-
-function clocktimeElapsed () {
-
-    var now = Date.now();
-    var timeSinceStart = (now - start) / 1000;
-
-    return timeSinceStart;
-}
-*/
 
 
 
