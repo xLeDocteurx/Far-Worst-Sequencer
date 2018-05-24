@@ -16,19 +16,6 @@ class Track {
     }
 }
 
-class drumRack_Steps {
-
-// Un systeme d'id pour éviter les problemes de réorganisation 
-// des array lors de la suppression d'un channel 
-    constructor (id, sample) {
-        
-//        this.steps = new Array(stepsResolution);
-        this.id = id;
-        this.name = sample.url.substring(sample.url.lastIndexOf('/')+1);
-        this.sample = sample;
-    }
-}
-
 class DrumRack_Clip {
 
     constructor (id, barsLength, steps) {
@@ -40,6 +27,19 @@ class DrumRack_Clip {
         } else {
             this.steps = steps;
         }
+    }
+}
+
+class drumRack_Channel {
+
+// Un systeme d'id pour éviter les problemes de réorganisation 
+// des array lors de la suppression d'un channel 
+    constructor (id, sample) {
+        
+//        this.steps = new Array(stepsResolution);
+        this.id = id;
+        this.name = sample.url.substring(sample.url.lastIndexOf('/')+1);
+        this.sample = sample;
     }
 }
 

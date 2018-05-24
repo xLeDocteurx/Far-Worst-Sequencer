@@ -33,9 +33,9 @@ var kick1;
 var channel_xx;
 var snare;
 var channel_xy;
-var hhclosed;
-var channel_xz;
 var clap;
+var channel_xz;
+var hhclosed;
 var channel_xa;
 
 
@@ -59,54 +59,57 @@ function preload() {
     all_tracks.push(track_xx);
     
 
-    channel_xx = new drumRack_Steps (all_tracks[0].channels.length, kick1);
+    channel_xx = new drumRack_Channel (all_tracks[0].channels.length, kick1);
     all_tracks[0].channels.push(channel_xx);
     
-    channel_xy = new drumRack_Steps (all_tracks[0].channels.length, snare);
+    channel_xy = new drumRack_Channel (all_tracks[0].channels.length, snare);
     all_tracks[0].channels.push(channel_xy);
 
-    channel_xz = new drumRack_Steps (all_tracks[0].channels.length, hhclosed);
+    channel_xz = new drumRack_Channel (all_tracks[0].channels.length, clap);
     all_tracks[0].channels.push(channel_xz);
 
-    channel_xa = new drumRack_Steps (all_tracks[0].channels.length, clap);
+    channel_xa = new drumRack_Channel (all_tracks[0].channels.length, hhclosed);
     all_tracks[0].channels.push(channel_xa);
 
 
     clip_xx = new DrumRack_Clip(all_tracks[0].clips.length, 1,
                                    [[1],[],[],[],
-                                    [4],[],[],[],
+                                    [3],[],[],[],
                                     [1],[],[1],[],
-                                    [4],[1],[],[]]);
+                                    [3],[1],[],[]]);
                                     
     all_tracks[0].clips.push(clip_xx);
 
     clip_xy = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
-                                   [[1],[],[3],[],
-                                    [2],[],[],[3],
-                                    [1],[],[3],[],
-                                    [2],[],[3],[3]]);
+                                   [[1],[],[4],[],
+                                    [2],[],[4],[],
+                                    [1],[],[4],[],
+                                    [2],[],[4],[4]]);
     
     all_tracks[0].clips.push(clip_xy);
 
     clip_xz = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
-                                   [[1],[],[3],[],
-                                    [1],[],[3],[],
-                                    [1],[],[3],[],
-                                    [1],[],[3],[]]);
+                                   [[1],[],[4],[],
+                                    [1],[],[4],[],
+                                    [1],[],[4],[],
+                                    [1],[],[4],[]]);
     
     all_tracks[0].clips.push(clip_xz);
 
     clip_xa = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
-                                   [[1],[3],[3],[3],
-                                    [2,3],[3],[3],[3],
-                                    [1],[3],[3],[3],
-                                    [2,3,4],[3],[3],[3]]);
+                                   [[1],[4],[4],[4],
+                                    [2,4],[4],[4],[4],
+                                    [1],[4],[4],[4],
+                                    [2,3,4],[4],[4],[4]]);
     
     all_tracks[0].clips.push(clip_xa);
 
 }
 
 function setup() {
+
+    console.table(all_tracks);
+
     frameRate(fr);
 
 // REMPLACER PAR UN MAP //
@@ -240,10 +243,40 @@ function launchSteps (step) {
 function clip_Edit (track_ID, clip_ID) {
 
         console.log("track, " + all_tracks[track_ID] + " nbr of channels : " + all_tracks[track_ID].channels.length);
-        document.getElementById("clip-container").innerHTML = `<div id="steps-container"></div>`;        
+        document.getElementById("clip-container").innerHTML = `<div id="channels-container">
+                                                                    <div id="channels-guide">
+                                                                    </div>
+                                                                </div>`;        
         for (var channel of all_tracks[track_ID].channels) {    
-            loadDrumRack_Steps(channel);
+            loadDrumRack_Channel(channel, track_ID, clip_ID);
         }  
+}
+
+function editStep(thiss, step, trackID, channelID, clipID) {
+///////////////////////////////////
+
+var track = all_tracks[trackID];
+var clip = track.clips[clipID];
+var steps = clip.steps;
+
+var index = clip.steps.indexOf(step);
+// var index = step;
+
+// console.log("track : " + track);
+// console.log("clip : " + clip);
+console.log("steps : " + steps);
+// console.table("channel : " + channelID);
+// console.log("step : " + index);
+
+    if (thiss.checked == false) {
+        var supr = clip.steps[step].splice(index, 1);
+        console.log("element supprimé : " + supr);
+        console.log(supr);
+    } else {
+        console.log(step);
+        clip.steps[step].splice(0, 0, track.channels[channelID].id + 1);
+    } 
+
 }
 
 function clip_Launch (track_ID, clip_ID) {
@@ -263,24 +296,44 @@ function loadTrack (track) {
     tracksContainer.innerHTML += ttemplate.html;
 }
 
-function loadDrumRack_Steps (channel, id) {
+/////// Y INTEGRER LE FOR OF DE LA BOUCLE DE CHARGEMENT DU SETUP
+function loadDrumRack_Channel (channel, trackID, clipID) {
     
+    var track = all_tracks[trackID];
+    var clip = track.clips[clipID];
+  // var channel = track.channels[j - 1];
+
     if (channel != null) {
-        var drumRackContainer = document.getElementById("steps-container");
-        console.log("loaddrumRack_Steps : " + channel.sample);
-        var drtemplate = new drumRackSteps_Template(channel, id);
-        drumRackContainer.innerHTML += drtemplate.html;
+        var channelsGuide = document.getElementById("channels-guide");
+        console.log("loaddrumRack_Channel : " + channel.sample);
+        var drtemplate = new drumRackChannel_Template(channel, clipID);
+
+        insertAfter(channelsGuide, drtemplate.element);
+        ////////// RAJOUT DES STEPS DE LA PISTE //////////
+        for (var step of clip.steps) {
+            var drclips = new stepTemplate(track, channel, clip, step);        
+//            drtemplate.appendChild(drclips);
+            document.getElementById(`${channel.name + "_currentClip"}`).appendChild(drclips.element);
+        }
+
     }
 }
 
+//////////////////////////////////
+///////////////////////////
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+//////////////////////////////////
+///////////////////////////
 function loadDrumRack_clip (track, clip) {
 
     var clipsContainer = document.getElementById(track.name);
     var cliptemplate = new drumRackClip_Template(track, clip);
     clipsContainer.innerHTML += cliptemplate.html;
 
-    // var stepsContainer = document.getElementById("steps-container");
-    // var stepstemplate = new drumRackSteps_Template(clip);
+    // var stepsContainer = document.getElementById("channels-container");
+    // var stepstemplate = new drumRackChannel_Template(clip);
     // stepsContainer.innerHTML += stepstemplate.html;
 }
 
