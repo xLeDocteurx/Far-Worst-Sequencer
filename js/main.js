@@ -1,4 +1,4 @@
-var fr = 30;
+var fr = 50;
 
 //var start;
 var isPlaying = false;
@@ -31,12 +31,16 @@ var track_xx_channels = [];
 
 var kick1;
 var channel_xx;
-var snare;
+var kick2;
 var channel_xy;
-var clap;
+var snare;
 var channel_xz;
-var hhclosed;
+var clap;
 var channel_xa;
+var hhclosed;
+var channel_xb;
+var voxhit;
+var channel_xc;
 
 
 ///////////////////////////////////////////////
@@ -50,9 +54,13 @@ function preload() {
  */
 
     kick1 = loadSound("./factory_samples/mad_zack/Satin_Charly/kick1.wav");
+    kick2 = loadSound("./factory_samples/mad_zack/Satin_Charly/kick2.wav");
     snare = loadSound("./factory_samples/mad_zack/Satin_Charly/snare.wav");
     hhclosed = loadSound("./factory_samples/mad_zack/Satin_Charly/hhc.wav");
     clap = loadSound("./factory_samples/mad_zack/Satin_Charly/clap.wav");
+    voxhit = loadSound("./factory_samples/mad_zack/Satin_Charly/00_voxhit.wav");
+    chor1 = loadSound("./factory_samples/mad_zack/Satin_Charly/chorus1.wav");
+    chor2 = loadSound("./factory_samples/mad_zack/Satin_Charly/chorus2.wav");
     
     var track_xx = new Track(all_tracks.length, "Drum Rack");
 
@@ -60,47 +68,59 @@ function preload() {
     
 
     channel_xx = new drumRack_Channel (all_tracks[0].channels.length, kick1);
-    all_tracks[0].channels.push(channel_xx);
+    all_tracks[0].channels.push(channel_xx)
     
-    channel_xy = new drumRack_Channel (all_tracks[0].channels.length, snare);
+    channel_xy = new drumRack_Channel (all_tracks[0].channels.length, kick2);
     all_tracks[0].channels.push(channel_xy);
-
-    channel_xz = new drumRack_Channel (all_tracks[0].channels.length, clap);
+    
+    channel_xz = new drumRack_Channel (all_tracks[0].channels.length, snare);
     all_tracks[0].channels.push(channel_xz);
 
-    channel_xa = new drumRack_Channel (all_tracks[0].channels.length, hhclosed);
+    channel_xa = new drumRack_Channel (all_tracks[0].channels.length, clap);
     all_tracks[0].channels.push(channel_xa);
+
+    channel_xb = new drumRack_Channel (all_tracks[0].channels.length, hhclosed);
+    all_tracks[0].channels.push(channel_xb);
+
+    channel_xc = new drumRack_Channel (all_tracks[0].channels.length, voxhit);
+    all_tracks[0].channels.push(channel_xc);
+
+    channel_xd = new drumRack_Channel (all_tracks[0].channels.length, chor1);
+    all_tracks[0].channels.push(channel_xd);
+
+    channel_xe = new drumRack_Channel (all_tracks[0].channels.length, chor2);
+    all_tracks[0].channels.push(channel_xe);
 
 
     clip_xx = new DrumRack_Clip(all_tracks[0].clips.length, 1,
                                    [[1],[],[],[],
-                                    [3],[],[],[],
+                                    [4],[],[],[],
                                     [1],[],[1],[],
-                                    [3],[1],[],[]]);
+                                    [4],[1],[],[6]]);
                                     
     all_tracks[0].clips.push(clip_xx);
 
     clip_xy = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
-                                   [[1],[],[4],[],
-                                    [2],[],[4],[],
-                                    [1],[],[4],[],
-                                    [2],[],[4],[4]]);
+                                   [[1],[],[5],[],
+                                    [3],[],[5],[],
+                                    [1],[],[5],[],
+                                    [3],[],[5],[5]]);
     
     all_tracks[0].clips.push(clip_xy);
 
     clip_xz = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
-                                   [[1],[],[4],[],
-                                    [1],[],[4],[],
-                                    [1],[],[4],[],
-                                    [1],[],[4],[]]);
+                                   [[1],[],[5],[],
+                                    [1],[],[5],[],
+                                    [1],[],[5],[],
+                                    [1],[],[5],[]]);
     
     all_tracks[0].clips.push(clip_xz);
 
     clip_xa = new DrumRack_Clip(all_tracks[0].clips.length, 1, 
-                                   [[1],[4],[4],[4],
-                                    [2,4],[4],[4],[4],
-                                    [1],[4],[4],[4],
-                                    [2,3,4],[4],[4],[4]]);
+                                   [[1],[5],[5],[5],
+                                    [3,5],[5],[5],[5],
+                                    [1],[5],[5],[5],
+                                    [3,5,5],[5],[5],[5]]);
     
     all_tracks[0].clips.push(clip_xa);
 
@@ -133,6 +153,12 @@ function setup() {
     hhclosed.playMode("restart");
     clap.setVolume(1.0);
     clap.playMode("restart");
+    voxhit.setVolume(1.0);
+    voxhit.playMode("restart");
+    chor1.setVolume(1.0);
+    chor1.playMode("restart");
+    chor2.setVolume(1.0);
+    chor2.playMode("restart");
 
 //////////////////////////////////////////
     

@@ -21,7 +21,7 @@ class DrumRack_Clip {
     constructor (id, barsLength, steps) {
         
         this.id = id;
-        this.channels = new Array(16);
+        this.channels = new Array(stepsResolution);
         if (!steps) {
             this.steps = new Array(stepsResolution * barsLength);
         } else {
