@@ -1,34 +1,20 @@
 {
-    "samplePacks" : [
-        {
+    "samplePack" : {
             "name" : "Satin Charley",
             "samples" : [
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick2.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                {"playmode" : "restart", "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"}
-                ,
-                ,
-                "./factory_samples/mad_zack/Satin_Charly/snare.wav",
-                "./factory_samples/mad_zack/Satin_Charly/hhc.wav",
-                "./factory_samples/mad_zack/Satin_Charly/clap.wav",
-                "./factory_samples/mad_zack/Satin_Charly/00_voxhit.wav",
-                "./factory_samples/mad_zack/Satin_Charly/chorus1.wav",
-                "./factory_samples/mad_zack/Satin_Charly/chorus2.wav",
-                "./factory_samples/mad_zack/Satin_Charly/trumpet1.wav",
-                "./factory_samples/mad_zack/Satin_Charly/trumpet2.wav",
-                "./factory_samples/mad_zack/Satin_Charly/trumpet3.wav"
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/kick1.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/kick2.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/snare.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/clap.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/hhc.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/00_voxhit.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/chorus1.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/chorus2.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/trumpet1.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/trumpet2.wav"},
+                {"playmode" : "restart", "fromStart" : true, "volume" : 1.0, "path" : "./factory_samples/mad_zack/Satin_Charly/trumpet3.wav"}
             ]
-        }
-
-    ],
+    },
     "tracks" : [
         {
             "clips" : [

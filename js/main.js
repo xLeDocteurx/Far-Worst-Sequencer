@@ -1,6 +1,6 @@
 var fr = 50;
+var makeymakeyMode = false;
 
-//var start;
 var isPlaying = false;
 
 var bpm = 105;
@@ -12,68 +12,30 @@ var stepsResolution = 16;
 
 var step = bar / stepsResolution;
 
-/*
-$.getScript("sequencer.js", function() {
-    alert("Script sequencer loaded but not necessarily executed.");
- });
-*/
-
 ///////////////////////////////////////////////
 var currentStep = 0;
 var update_timeout;
 
-
-
 var all_tracks = [];
 
-//var track_xx = [];
-var track_xx_channels = [];
-
-var kick1;
-var channel_xx;
-var kick2;
-var channel_xy;
-var snare;
-var channel_xz;
-var clap;
-var channel_xa;
-var hhclosed;
-var channel_xb;
-var voxhit;
-var channel_xc;
-var chor1;
-var channel_xd;
-var chor2;
-var channel_xe;
-var trumpet1;
-var channel_xf;
-var trumpet2;
-var channel_xg;
-var trumpet3;
-var channel_xh;
-
-
 ////////////////////// CONVERT AND IMPORT JSON AS SAVE FILES /////////////////////////
-// var receptJSON;
-// console.log(receptJSON);
+var samplePackSamples = [];
+convertJSON("JSON/save.json");
 
-// function convertJSON(file) {
+function convertJSON(fileURL) {
 
-//     var requestURL = `../JSON/${file}.json`;
-//     var request = new XMLHttpRequest();
-//     request.open('GET', requestURL);
-//     request.responseType = 'json';
-//     request.send();
-//     request.onload = function () {
-//         var reponse = request.reponse;
-//         reponse.map(x => receptJSON.push(x));
-//         console.log(request.reponse);
-//         console.log(receptJSON);
-//     }
-// }
+    var requestURL = fileURL;
+    var request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function () {
+        var diapo = request.response;        
+        diapo.samplePack.samples.map(x => samplePackSamples.push(x.path));
+        // console.log(samplePackSamples);
+    }
+}
 
-// convertJSON();
-// console.log(receptJSON);
 //////////////////////////////////////////////
 
 var wiked;
@@ -89,68 +51,22 @@ function preload() {
  */
 
     var track_xx = new Track(all_tracks.length, "Drum Rack");
-
     all_tracks.push(track_xx);
 
-    // console.log(receptJSON.samplePacks[0].length);
-    // for (var obj of receptJSON.samplePacks[0].samples) {
-        
-    //     var sample = loadSound(obj.path);
-    //     var channel = new drumRack_Channel (all_tracks[0].channels.length, sample);
-    //     all_tracks[0].channels.push(channel);
-    // }
+    for (var item of samplePackSamples) {
+
+        var sample = loadSound(item);
+
+        var channel = new drumRack_Channel (all_tracks[0].channels.length, sample);
+        all_tracks[0].channels.push(channel);
+    }
 
     wiked = loadSound("./factory_samples/wiked.aiff");
     jungleismassive = loadSound("./factory_samples/jungleismassive.aiff");
     ting = loadSound("./factory_samples/ting.aiff");
     yo = loadSound("./factory_samples/yo.mp3");
     
-    kick1 = loadSound("./factory_samples/mad_zack/Satin_Charly/kick1.wav");
-    kick2 = loadSound("./factory_samples/mad_zack/Satin_Charly/kick2.wav");
-    snare = loadSound("./factory_samples/mad_zack/Satin_Charly/snare.wav");
-    hhclosed = loadSound("./factory_samples/mad_zack/Satin_Charly/hhc.wav");
-    clap = loadSound("./factory_samples/mad_zack/Satin_Charly/clap.wav");
-    voxhit = loadSound("./factory_samples/mad_zack/Satin_Charly/00_voxhit.wav");
-    chor1 = loadSound("./factory_samples/mad_zack/Satin_Charly/chorus1.wav");
-    chor2 = loadSound("./factory_samples/mad_zack/Satin_Charly/chorus2.wav");
-    trumpet1 = loadSound("./factory_samples/mad_zack/Satin_Charly/trumpet1.wav");
-    trumpet2 = loadSound("./factory_samples/mad_zack/Satin_Charly/trumpet2.wav");
-    trumpet3 = loadSound("./factory_samples/mad_zack/Satin_Charly/trumpet3.wav");
-    
-    
 
-    channel_xx = new drumRack_Channel (all_tracks[0].channels.length, kick1);
-    all_tracks[0].channels.push(channel_xx);
-    
-    channel_xy = new drumRack_Channel (all_tracks[0].channels.length, kick2);
-    all_tracks[0].channels.push(channel_xy);
-    
-    channel_xz = new drumRack_Channel (all_tracks[0].channels.length, snare);
-    all_tracks[0].channels.push(channel_xz);
-
-    channel_xa = new drumRack_Channel (all_tracks[0].channels.length, clap);
-    all_tracks[0].channels.push(channel_xa);
-
-    channel_xb = new drumRack_Channel (all_tracks[0].channels.length, hhclosed);
-    all_tracks[0].channels.push(channel_xb);
-
-    channel_xc = new drumRack_Channel (all_tracks[0].channels.length, voxhit);
-    all_tracks[0].channels.push(channel_xc);
-    
-    channel_xd = new drumRack_Channel (all_tracks[0].channels.length, chor1);
-    all_tracks[0].channels.push(channel_xd);
-
-    channel_xe = new drumRack_Channel (all_tracks[0].channels.length, chor2);
-    all_tracks[0].channels.push(channel_xe);
-
-    channel_xf = new drumRack_Channel (all_tracks[0].channels.length, trumpet1);
-    all_tracks[0].channels.push(channel_xf);
-
-    channel_xg = new drumRack_Channel (all_tracks[0].channels.length, trumpet2);
-    all_tracks[0].channels.push(channel_xg);
-
-    channel_xh = new drumRack_Channel (all_tracks[0].channels.length, trumpet3);
-    all_tracks[0].channels.push(channel_xh);
 
 
     clip_xx = new DrumRack_Clip(all_tracks[0].clips.length, 1,
@@ -198,39 +114,39 @@ function setup() {
 
         loadTrack(track);
 
-        console.log("track, " + track + " nbr of clips : " + track.clips.length);
+        // console.log("track, " + track + " nbr of clips : " + track.clips.length);
         for (var clip of track.clips) {
             
-            console.log(clip);
+            // console.log(clip);
             loadDrumRack_clip(track, clip);
         }
     }
 
     // for (var channel of all_tracks[0].channels) {
     //     channel.sample.setVolume(1.0);
-    //     channel.sample.playMode(receptJSON.samplePacks[0].samples[channel.index].playmode);
+    //     channel.sample.playMode(samplePackSamples.samples[channel.index].playmode);
     // }
 
-    kick1.setVolume(1.0);
-    kick1.playMode("restart");
-    snare.setVolume(1.0);
-    snare.playMode("restart");
-    hhclosed.setVolume(1.0);
-    hhclosed.playMode("restart");
-    clap.setVolume(1.0);
-    clap.playMode("restart");
-    voxhit.setVolume(1.0);
-    voxhit.playMode("restart");
-    chor1.setVolume(1.0);
-    chor1.playMode("restart");
-    chor2.setVolume(1.0);
-    chor2.playMode("restart");
-    trumpet1.setVolume(1.0);
-    trumpet1.playMode("restart");
-    trumpet2.setVolume(1.0);
-    trumpet2.playMode("restart");
-    trumpet3.setVolume(1.0);
-    trumpet3.playMode("restart");
+    // kick1.setVolume(1.0);
+    // kick1.playMode("restart");
+    // snare.setVolume(1.0);
+    // snare.playMode("restart");
+    // hhclosed.setVolume(1.0);
+    // hhclosed.playMode("restart");
+    // clap.setVolume(1.0);
+    // clap.playMode("restart");
+    // voxhit.setVolume(1.0);
+    // voxhit.playMode("restart");
+    // chor1.setVolume(1.0);
+    // chor1.playMode("restart");
+    // chor2.setVolume(1.0);
+    // chor2.playMode("restart");
+    // trumpet1.setVolume(1.0);
+    // trumpet1.playMode("restart");
+    // trumpet2.setVolume(1.0);
+    // trumpet2.playMode("restart");
+    // trumpet3.setVolume(1.0);
+    // trumpet3.playMode("restart");
 
 //////////////////////////////////////////
     
@@ -262,6 +178,17 @@ function update() {
     currentStep += 1;
     if (currentStep >= stepsResolution) {
        currentStep = 0;
+    }
+}
+
+function changemakeymakeyMode () {
+
+    if (makeymakeyMode == true) {
+        makeymakeyMode = false;
+        console.log("makeymakeyMode : " + makeymakeyMode);
+    } else {
+        makeymakeyMode = true;
+        console.log("makeymakeyMode : " + makeymakeyMode);
     }
 }
 
