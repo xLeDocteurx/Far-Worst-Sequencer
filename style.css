@@ -167,3 +167,36 @@ body {
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { ... }
+
+
+
+
+
+
+/*modif philippe sur les checkbox*/
+input[type="checkbox"]{
+    display:inline-block;
+    -webkit-appearance: push-button;
+    background:#444;
+    border: solid 1px #FFFFFF;
+    /border-style: hidden;
+    margin:1px;
+    width:24px;
+    height:24px;
+    
+}
+
+input[type="checkbox"]{
+    content:" ";
+    display:inline-block;
+    width:24px;
+    height:24px;
+    background-color:#444;
+    /border-radius:12px;
+}
+input[type="checkbox"]:checked {
+    -webkit-appearance: push-button;
+    content:" " !important;
+    background:limegreen;
+    /background-color:#FFF;
+}
