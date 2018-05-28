@@ -1,6 +1,6 @@
 function track_Template (track) {
 
-    this.html = "<div id='" + track.name + "' type=\"button\" class=\"channel border rounded\">" + 
+    this.html = "<div id='" + track.name + "' type=\"button\" class=\"channel border\">" + 
                     "<div>" + 
                     track.name + 
                     "</div>" + 
@@ -13,11 +13,10 @@ function drumRackChannel_Template (channel) {
     var filename = channel.name;
 
     this.html = `<div id="${filename}" class="row border">
-                    <div class="col-sm-1 border">
+                    <div class="col border">
                         ${filename} : 
                     </div>
                     <div id="${filename + "_currentClip"}" class="col border">
-                        
                     </div>
                 </div>`;
 

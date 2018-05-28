@@ -268,7 +268,9 @@ function launchSteps (step) {
 function clip_Edit (track_ID, clip_ID) {
 
         console.log("track, " + all_tracks[track_ID] + " nbr of channels : " + all_tracks[track_ID].channels.length);
-        document.getElementById("clip-container").innerHTML = `<div id="channels-container">
+        document.getElementById("clip-container").innerHTML = ` <div id="pads-container" class="col p-0">
+                                                                </div>
+                                                                <div id="channels-container" class="col p-0">
                                                                     <div id="channels-guide">
                                                                     </div>
                                                                 </div>`;        
