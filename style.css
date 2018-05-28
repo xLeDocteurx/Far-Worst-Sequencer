@@ -175,7 +175,6 @@ body {
 
 /*modif philippe sur les checkbox*/
 input[type="checkbox"]{
-    display:inline-block;
     -webkit-appearance: push-button;
     background:#444;
     border: solid 1px #FFFFFF;
@@ -188,7 +187,6 @@ input[type="checkbox"]{
 
 input[type="checkbox"]{
     content:" ";
-    display:inline-block;
     width:24px;
     height:24px;
     background-color:#444;
