@@ -13,8 +13,6 @@ body {
 
 #bottomWindow {
 
-  height: 200px;
-  overflow: scroll;
   /* overflow-x: hidden; */
 }
 
@@ -31,7 +29,9 @@ body {
 
 #channels-container {
   /* min-width: 100px; */ 
-  width: 500px; 
+  width: 500px;
+  height: 200px;
+  overflow: scroll;
 }
 
 .channel {

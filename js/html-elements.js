@@ -12,11 +12,11 @@ function drumRackChannel_Template (channel) {
 
     var filename = channel.name;
 
-    this.html = `<div id="${filename}" class="row border">
-                    <div class="col border">
+    this.html = `<div id="${filename}" class="border">
+                    <div class="border">
                         ${filename} : 
                     </div>
-                    <div id="${filename + "_currentClip"}" class="col border">
+                    <div id="${filename + "_currentClip"}" class="border">
                     </div>
                 </div>`;
 

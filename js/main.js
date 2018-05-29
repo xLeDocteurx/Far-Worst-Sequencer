@@ -19,7 +19,8 @@ var update_timeout;
 var all_tracks = [];
 
 ////////////////////// CONVERT AND IMPORT JSON AS SAVE FILES /////////////////////////
-var samplePackSamples = [];
+var JSON_samplePack_Samples = [];
+var JSON_tracks = [];
 convertJSON("JSON/save.json");
 
 function convertJSON(fileURL) {
@@ -31,8 +32,10 @@ function convertJSON(fileURL) {
     request.send();
     request.onload = function () {
         var diapo = request.response;        
-        diapo.samplePack.samples.map(x => samplePackSamples.push(x.path));
-        // console.log(samplePackSamples);
+        diapo.samplePack.samples.map(x => JSON_samplePack_Samples.push(x));
+        diapo.tracks.map(x => JSON_tracks.push(x));
+        // console.log(JSON_samplePack_Samples);
+        console.log(JSON_tracks);
     }
 }
 
@@ -53,18 +56,31 @@ function preload() {
     var track_xx = new Track(all_tracks.length, "Drum Rack");
     all_tracks.push(track_xx);
 
-    for (var item of samplePackSamples) {
+    // for (var trackk of JSON_tracks) {
+    //     var track_xx = new Track(all_tracks.length, trackk.type);
+    //     all_tracks.push(track_xx);
+    // }
 
-        var sample = loadSound(item);
+    for (var item of JSON_samplePack_Samples) {
+
+        var sample = loadSound(item.path);
+
+        sample.setVolume(item.volume);
+        sample.playMode(item.playMode);
 
         var channel = new drumRack_Channel (all_tracks[0].channels.length, sample);
         all_tracks[0].channels.push(channel);
     }
 
-    wiked = loadSound("./factory_samples/wiked.aiff");
-    jungleismassive = loadSound("./factory_samples/jungleismassive.aiff");
-    ting = loadSound("./factory_samples/ting.aiff");
-    yo = loadSound("./factory_samples/yo.mp3");
+    // wiked = loadSound("./factory_samples/wiked.aiff");
+    // jungleismassive = loadSound("./factory_samples/jungleismassive.aiff");
+    // ting = loadSound("./factory_samples/ting.aiff");
+    // yo = loadSound("./factory_samples/yo.mp3");
+
+    wiked = loadSound("./factory_samples/200101.mp3");
+    jungleismassive = loadSound("./factory_samples/200102.mp3");
+    ting = loadSound("./factory_samples/200103.mp3");
+    yo = loadSound("./factory_samples/200104.mp3");
     
 
 
@@ -111,12 +127,9 @@ function setup() {
 
 // REMPLACER PAR UN MAP //
     for (var track of all_tracks) {
-
         loadTrack(track);
-
         // console.log("track, " + track + " nbr of clips : " + track.clips.length);
         for (var clip of track.clips) {
-            
             // console.log(clip);
             loadDrumRack_clip(track, clip);
         }
@@ -124,7 +137,7 @@ function setup() {
 
     // for (var channel of all_tracks[0].channels) {
     //     channel.sample.setVolume(1.0);
-    //     channel.sample.playMode(samplePackSamples.samples[channel.index].playmode);
+    //     channel.sample.playMode(JSON_samplePack_Samples.samples[channel.index].playmode);
     // }
 
     // kick1.setVolume(1.0);
@@ -268,9 +281,9 @@ function launchSteps (step) {
 function clip_Edit (track_ID, clip_ID) {
 
         console.log("track, " + all_tracks[track_ID] + " nbr of channels : " + all_tracks[track_ID].channels.length);
-        document.getElementById("clip-container").innerHTML = ` <div id="pads-container" class="col-1 p-0">
+        document.getElementById("clip-container").innerHTML = ` <div id="pads-container" class="d-inline p-0">
                                                                 </div>
-                                                                <div id="channels-container" class="col p-0">
+                                                                <div id="channels-container" class="d-inline p-0">
                                                                     <div id="channels-guide">
                                                                     </div>
                                                                 </div>`;        
