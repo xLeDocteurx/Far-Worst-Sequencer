@@ -31,218 +31,138 @@
 
 <body class="bg-secondary">
 
-	<header>
-		<nav class="navbar navbar-expand navbar-dark bg-dark">
+	<!-- <div class="d-flex w-100 h-100 p-0 mx-auto flex-column"> -->
 
-			<ul class="navbar-nav mr-auto">
+		<header class="sticky-top">
+			<nav class="navbar navbar-expand navbar-dark bg-dark">
 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
-					<div class="dropdown-menu" aria-labelledby="navbar1">
-						<div class="dropdown-divider"></div>
-						<h6 class="dropdown-header">Project</h6>
-						<a class="dropdown-item disabled" href="#">New</a>
-						<a class="dropdown-item disabled" href="#">Save</a>
-						<a class="dropdown-item disabled" href="#">load</a>
-						<h6 class="dropdown-header">Software</h6>
-						<a class="dropdown-item" href="javascript:self.close()">Quit</a>
-					</div>
-				</li>
+				<ul class="navbar-nav mr-auto">
 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
-					<div class="dropdown-menu" aria-labelledby="navbar1">
-						<div class="dropdown-divider"></div>
-						<h6 class="dropdown-header">Current Track</h6>
-						<a class="dropdown-item disabled" href="#">Add clip</a>
-						<a class="dropdown-item disabled" href="#">Add channel</a>
-						<a class="dropdown-item disabled" href="#">Add Return</a>
-						<a class="dropdown-item disabled" href="#">Add Scene</a>
-						<div class="dropdown-divider"></div>
-						<h6 class="dropdown-header">Project Settings</h6>
-						<!-- <a class="dropdown-item" href="#">MakeyMakey : <input type="checkbox" onclick="changemakeymakeyMode()"></a> -->
-					</div>
-				</li>
-
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Infos</a>
-					<div class="dropdown-menu" aria-labelledby="navbar1">
-						<a class="dropdown-item disabled" href="#">Help</a>
-						<a class="dropdown-item disabled" href="#">Documentation</a>
-						<a class="dropdown-item disabled" href="#">About</a>
-					</div>
-				</li>
-
-			</ul>
-
-
-
-			<a class="navbar-brand" href="#">Far Worst Sequencer</a>
-		</nav>
-
-		<nav class="row bg-dark">
-
-			<div class="ml-auto"></div>
-			<button class="btn btn-success" onclick="sessionPlay()">Play</button>
-			<button class="btn btn-warning" onclick="sessionPause()">Pause</button>
-			<button class="btn btn-danger" onclick="sessionStop()">Stop</button>
-			<div class="d-inline-block">
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">bpm</span>
-					</div>
-					<input id="input-bpm" type="number" value="105" min="70" max="300" onchange="setBPMx(this.value)">
-				</div>
-			</div>
-			<div class="mr-auto"></div>
-			<span class="mr-5">
-				<b class="text-warning">MakeyMakey :</b>
-				<input id="makeymakey_checkbox01" type="checkbox" onclick="changemakeymakeyMode()">
-			</span>
-
-		</nav>
-	</header>
-
-	<main id="main" class="container-fluid">
-
-		<!--	Pour plus tard : La sidebar de gauche ( la biblihoteque contenant les modules et inch allah l'explorateur de fichiers )  
-		PS : Peut etre penser à mettre la sidebar dynamique à l'extérieur du main. -->
-
-		<!--La bande du haut-->
-		<section id="topWindow" class="row p-0">
-			<!--
-			<div class="col-sm-1">
-			</div> -->
-			<div id="tracks-container" class="col d-flex flex-row p-0">
-				<!-- <div type="button" class="channel border rounded">
-					<div>Drum Rack</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn">Clip ##</button>
-							<button type="button" class="btn disabled launch-btn">Launch</button>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
+						<div class="dropdown-menu" aria-labelledby="navbar1">
+							<div class="dropdown-divider"></div>
+							<h6 class="dropdown-header">Project</h6>
+							<a class="dropdown-item disabled" href="#">New</a>
+							<a class="dropdown-item disabled" href="#">Save</a>
+							<a class="dropdown-item disabled" href="#">load</a>
+							<h6 class="dropdown-header">Software</h6>
+							<a class="dropdown-item" href="javascript:self.close()">Quit</a>
 						</div>
-					</div>
+					</li>
 
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn">Clip ##</button>
-							<button type="button" class="btn launch-btn">Launch</button>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
+						<div class="dropdown-menu" aria-labelledby="navbar1">
+							<div class="dropdown-divider"></div>
+							<h6 class="dropdown-header">Current Track</h6>
+							<a class="dropdown-item disabled" href="#">Add clip</a>
+							<a class="dropdown-item disabled" href="#">Add channel</a>
+							<a class="dropdown-item disabled" href="#">Add Return</a>
+							<a class="dropdown-item disabled" href="#">Add Scene</a>
+							<div class="dropdown-divider"></div>
+							<h6 class="dropdown-header">Project Settings</h6>
+							<!-- <a class="dropdown-item" href="#">MakeyMakey : <input type="checkbox" onclick="changemakeymakeyMode()"></a> -->
 						</div>
-					</div>
+					</li>
 
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn">Clip ##</button>
-							<button type="button" class="btn launch-btn">Launch</button>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Infos</a>
+						<div class="dropdown-menu" aria-labelledby="navbar1">
+							<a class="dropdown-item disabled" href="#">Help</a>
+							<a class="dropdown-item disabled" href="#">Documentation</a>
+							<a class="dropdown-item disabled" href="#">About</a>
 						</div>
+					</li>
+
+				</ul>
+
+
+
+				<a class="navbar-brand" href="#">Far Worst Sequencer</a>
+			</nav>
+
+			<nav class="row bg-dark">
+
+				<div class="ml-auto"></div>
+				<button class="btn btn-success" onclick="sessionPlay()">Play</button>
+				<button class="btn btn-warning" onclick="sessionPause()">Pause</button>
+				<button class="btn btn-danger" onclick="sessionStop()">Stop</button>
+				<div class="d-inline-block">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">bpm</span>
+						</div>
+						<input id="input-bpm" type="number" value="105" min="70" max="300" onchange="setBPMx(this.value)">
 					</div>
 				</div>
-				<div type="button" class="channel border rounded">
-					<div>Midi Instrument</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
+				<div class="mr-auto"></div>
+				<span class="mr-5">
+					<b class="text-warning">MakeyMakey :</b>
+					<input id="makeymakey_checkbox01" type="checkbox" onclick="changemakeymakeyMode()">
+				</span>
 
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn">Clip ##</button>
-							<button type="button" class="btn launch-btn">Launch</button>
-						</div>
-					</div>
+			</nav>
+		</header>
 
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn">Clip ##</button>
-							<button type="button" class="btn launch-btn">Launch</button>
-						</div>
-					</div>
-				</div>
-				<div type="button" class="channel border rounded">
-					<div>Audio Clip</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
+		<main id="main" class="container-fluid h-100">
 
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn">Clip ##</button>
-							<button type="button" class="btn launch-btn">Launch</button>
-						</div>
-					</div>
+			<!--	Pour plus tard : La sidebar de gauche ( la biblihoteque contenant les modules et inch allah l'explorateur de fichiers )  
+			PS : Peut etre penser à mettre la sidebar dynamique à l'extérieur du main. -->
 
-				</div>
-				<div type="button" class="channel border rounded">
-					<div>Audio Input</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
-				</div>
-
-
-
-				<div type="button" class="channel border rounded ml-auto">
-					<div>Return A</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
-				</div>
-				<div type="button" class="channel border rounded">
-					<div>Return B</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
+			<!--La bande du haut-->
+			<section id="topWindow" class="row p-0">
+				<!--
+				<div class="col-sm-1">
 				</div> -->
-			</div>
-
-
-
-			<div class="col-sm-1 d-flex flex-row-reverse p-0">
-				<div id="scenes" class="border">
-					<div>Scenes</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-						 aria-valuemax="100"></div>
-					</div>
-
-
-
-					<div>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn" onclick="previousSteps()"> - </button>
-							<button type="button" class="btn launch-btn" onclick="nextSteps()"> + </button>
-						</div>
-					</div>
+				<div id="tracks-container" class="col d-flex flex-row p-0">
 
 				</div>
-			</div>
-		</section>
-		<!-- La bande du bas -->
-		<section id="bottomWindow" class="row p-0">
-			<div id="clip-container" class="col p-0">
-				Clip Container
-			</div>
-		</section>
-		<section id="bottomWindowBis" class="row p-0">
-			<div id="instrument-container" class="col p-0">
-				Instrument Container
-			</div>
-			<div id="channel-container" class="col p-0">
-				Channel Container
-			</div>
-		</section>
-	</main>
 
-	<!-- <footer class="row fixed-bottom">
-		// Footer //
-	</footer> -->
 
+
+				<div class="col-sm-1 d-flex flex-row-reverse p-0">
+					<div id="scenes" class="border">
+						<div>Scenes</div>
+						<div class="progress">
+							<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+							 aria-valuemax="100"></div>
+						</div>
+
+
+
+						<div>
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<button type="button" class="btn" onclick="previousSteps()"> - </button>
+								<button type="button" class="btn launch-btn" onclick="nextSteps()"> + </button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<!-- La bande du bas -->
+			<section id="bottomWindow" class="row p-0 mt-auto">
+				<div id="clip-container" class="col p-0">
+					Clip Container
+				</div>
+			</section>
+			<section id="bottomWindowBis" class="row p-0">
+				<div id="instrument-container" class="col p-0">
+					Instrument Container
+				</div>
+				<div id="channel-container" class="col p-0">
+					Channel Container
+				</div>
+			</section>
+
+		</main>
+
+		<!-- <footer class="row fixed-bottom">
+			// Footer //
+		</footer> -->
+
+	<!-- </div> -->
 	<!-- Scripts -->
 
 	<script language="javascript" type="text/javascript" src="js/scripts.js"></script>

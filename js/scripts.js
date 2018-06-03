@@ -7,10 +7,10 @@
 // }
 
 var checkbox_makeymakey = document.getElementById("makeymakey_checkbox01");
-console.log(document.getElementById("makeymakey_checkbox01"));
-console.log(checkbox_makeymakey.checked);
+// console.log(document.getElementById("makeymakey_checkbox01"));
+// console.log(checkbox_makeymakey.checked);
 checkbox_makeymakey.checked = false;
-console.log(checkbox_makeymakey.checked);
+// console.log(checkbox_makeymakey.checked);
 
 
 
