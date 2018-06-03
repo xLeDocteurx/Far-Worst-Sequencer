@@ -16,7 +16,7 @@ document.addEventListener('keypress', (event) => {
             ting.play();
         } else if (keyName == "ArrowDown") {
             // all_tracks[0].channels[3].sample.play();
-            yo.playMode("restart");
+            // yo.playMode("restart");
             yo.play();
         } else if (keyName == " ") {
             all_tracks[0].channels[4].sample.play();

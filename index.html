@@ -24,7 +24,6 @@
 
 	<script language="javascript" type="text/javascript" src="js/eventListener.js"></script>
 
-	<script language="javascript" type="text/javascript" src="js/scripts.js"></script>
 	<link rel="stylesheet" href="style.css">
 
 </head>
@@ -59,7 +58,7 @@
 						<a class="dropdown-item disabled" href="#">Add Scene</a>
 						<div class="dropdown-divider"></div>
 						<h6 class="dropdown-header">Project Settings</h6>
-						<a class="dropdown-item" href="#">MakeyMakey : <input type="checkbox" onclick="changemakeymakeyMode()"></a>
+						<!-- <a class="dropdown-item" href="#">MakeyMakey : <input type="checkbox" onclick="changemakeymakeyMode()"></a> -->
 					</div>
 					</li>
 
@@ -80,6 +79,7 @@
 		</nav>
 
 			<nav class="row bg-dark">
+				
 				<div class="ml-auto"></div>
 				<button class="btn btn-success" onclick="sessionPlay()">Play</button>
 				<button class="btn btn-warning" onclick="sessionPause()">Pause</button>
@@ -93,6 +93,8 @@
 					</div>
 				</div>
 				<div class="mr-auto"></div>
+			<span class="mr-5"><b class="text-warning">MakeyMakey :</b> <input id="makeymakey_checkbox01" type="checkbox" onclick="changemakeymakeyMode()"></span>
+				
 			</nav>
 	</header>
 
@@ -228,6 +230,7 @@
 
 	<!-- Scripts -->
 
+	<script language="javascript" type="text/javascript" src="js/scripts.js"></script>
 
 
 </body>
