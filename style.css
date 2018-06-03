@@ -6,9 +6,14 @@ body {
   line-height: 1;
 }
 
+#main {
+
+}
+
 #topWindow {
 
-  height: 400px;
+  /* min-height: 150px; */
+  /* max-height: 400px; */
 }
 
 #bottomWindow {
@@ -17,22 +22,35 @@ body {
 }
 
 #clip-container {
+  /* min-height: 150px; */
   /* min-width: 100px; */  
 }
 
+#bottomWindowBis {
+  /* min-height: 150px; */
+}
+
+#instrument-container {
+
+}
+
+#channel-container {
+
+}
 
 #pads-container {
   /* min-width: 100px; */ 
   width: 200px; 
+  background-color: burlywood;
 }
 
 
-#channels-container {
+/* #channels-container { */
   /* min-width: 100px; */ 
-  width: 500px;
+  /* width: 500px; */
   /* height: 200px;
   overflow: scroll; */
-}
+/* } */
 
 .channel {
   /* min-width: 100px; */
@@ -54,7 +72,7 @@ body {
 
 .steps-title {
 
-  width: 100px;
+  /* width: 100px; */
 }
 
 
