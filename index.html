@@ -33,8 +33,11 @@
 
 	<!-- <div class="d-flex w-100 h-100 p-0 mx-auto flex-column"> -->
 
-		<header class="sticky-top">
-			<nav class="navbar navbar-expand navbar-dark bg-dark">
+
+	<main id="main" class="container-fluid h-100 p-0">
+
+		<header class="">
+			<nav class="navbar navbar-expand navbar-dark bg-dark p-0 m-0">
 
 				<ul class="navbar-nav mr-auto">
 
@@ -82,7 +85,7 @@
 				<a class="navbar-brand" href="#">Far Worst Sequencer</a>
 			</nav>
 
-			<nav class="row bg-dark">
+			<nav class="row bg-dark p-0 m-0">
 
 				<div class="ml-auto"></div>
 				<button class="btn btn-success" onclick="sessionPlay()">Play</button>
@@ -104,61 +107,58 @@
 
 			</nav>
 		</header>
-
-		<main id="main" class="container-fluid h-100">
-
-			<!--	Pour plus tard : La sidebar de gauche ( la biblihoteque contenant les modules et inch allah l'explorateur de fichiers )  
+		<!--	Pour plus tard : La sidebar de gauche ( la biblihoteque contenant les modules et inch allah l'explorateur de fichiers )  
 			PS : Peut etre penser à mettre la sidebar dynamique à l'extérieur du main. -->
 
-			<!--La bande du haut-->
-			<section id="topWindow" class="row p-0 h-50">
-				<!--
+		<!--La bande du haut-->
+		<section id="topWindow" class="row px-3">
+			<!--
 				<div class="col-sm-1">
 				</div> -->
-				<div id="tracks-container" class="col d-flex flex-row p-0">
+			<div id="tracks-container" class="col d-flex flex-row p-0">
 
-				</div>
-
-
-
-				<div class="col-sm-1 d-flex flex-row-reverse p-0">
-					<div id="scenes" class="border">
-						<div>Scenes</div>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-							 aria-valuemax="100"></div>
-						</div>
+			</div>
 
 
-
-						<div>
-							<div class="btn-group" role="group" aria-label="Basic example">
-								<button type="button" class="btn" onclick="previousSteps()"> - </button>
-								<button type="button" class="btn launch-btn" onclick="nextSteps()"> + </button>
-							</div>
-						</div>
-
+			<!-- ///// Changer le type d'allignement de la div ///// -->
+			<div class="col-sm-1 d-flex flex-row-reverse p-0">
+				<div id="scenes" class="border">
+					<div>Scenes</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+						 aria-valuemax="100"></div>
 					</div>
-				</div>
-			</section>
-			<!-- La bande du bas -->
-			<section id="bottomWindow" class="row p-0">
-				<div id="clip-container" class="col p-0">
-					Clip Container
-				</div>
-			</section>
-			<section id="bottomWindowBis" class="row p-0">
-				<div id="instrument-container" class="col p-0">
-					Instrument Container
-				</div>
-				<div id="channel-container" class="col p-0">
-					Channel Container
-				</div>
-			</section>
 
-		</main>
 
-		<!-- <footer class="row fixed-bottom">
+
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn" onclick="previousSteps()"> - </button>
+							<button type="button" class="btn launch-btn" onclick="nextSteps()"> + </button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- La bande du bas -->
+		<section id="bottomWindow" class="row px-3">
+			<div id="clip-container" class="col p-0">
+				Clip Container
+			</div>
+		</section>
+		<section id="bottomWindowBis" class="row px-3">
+			<div id="instrument-container" class="col p-0">
+				Instrument Container
+			</div>
+			<div id="channel-container" class="col p-0">
+				Channel Container
+			</div>
+		</section>
+
+	</main>
+
+	<!-- <footer class="row fixed-bottom">
 			// Footer //
 		</footer> -->
 
